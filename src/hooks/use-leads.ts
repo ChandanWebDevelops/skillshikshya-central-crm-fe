@@ -658,3 +658,11 @@ export function useArchiveLead() {
     onError: (e) => toast.error(apiErrorMessage(e, "Could not update lead")),
   });
 }
+
+export function useCallSummary(enabled: boolean = true) {
+  return useQuery({
+    queryKey: ["call-summary"],
+    queryFn: () => leadsService.getCallSummary(),
+    enabled,
+  });
+}

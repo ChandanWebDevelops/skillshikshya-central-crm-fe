@@ -130,7 +130,7 @@ export function LeadActionDialogs({ action, lead, onClose }: Props) {
         caller: user?.id ?? null,
         direction: call.direction,
         outcome: call.outcome || null,
-        duration_seconds: call.duration ? Math.round(Number(call.duration) * 60) : null,
+        duration_input: call.duration || null,
         recording_url: call.recording.trim() || null,
         notes: call.notes.trim() || null,
         next_followup_at: call.nextFollowUp ? toNepalIso(call.nextFollowUp) : null,
@@ -215,10 +215,10 @@ export function LeadActionDialogs({ action, lead, onClose }: Props) {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="grid gap-2">
-                <Label>Duration (minutes)</Label>
+                <Label>Duration (e.g. 4:19, 4m19s)</Label>
                 <Input
-                  type="number"
-                  min={0}
+                  type="text"
+                  
                   placeholder="e.g. 4"
                   value={call.duration}
                   onChange={(e) => setC("duration", e.target.value)}

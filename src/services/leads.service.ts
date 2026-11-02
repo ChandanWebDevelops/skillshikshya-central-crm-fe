@@ -182,6 +182,14 @@ export const leadsService = {
   async deletePayment(leadId: number, enrollmentId: number, id: number) {
     await api.delete(`/leads/${leadId}/enrollments/${enrollmentId}/payments/${id}/`);
   },
+  async getGlobalCalls(params: any = {}) {
+    const { data } = await api.get<Paginated<ApiLeadCall>>("/calls/", { params });
+    return data;
+  },
+  async getCallSummary(params: any = {}) {
+    const { data } = await api.get<any>("/call-summary/", { params });
+    return data;
+  },
   async calls(leadId: number, params: CallListParams = {}) {
     const { data } = await api.get<Paginated<ApiLeadCall>>(`/leads/${leadId}/calls/`, { params });
     return data;
@@ -230,6 +238,6 @@ export const leadsService = {
       Object.entries(params).flatMap(([k, v]) => (v == null ? [] : [[k, String(v)]])),
     );
     const q = qs.toString();
-    return `/api/leads/export_csv/${q ? `?${q}` : ""}`;
+    return `/api/calls/export_csv/${q ? `?${q}` : ""}`;
   },
 };
